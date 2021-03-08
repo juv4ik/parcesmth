@@ -6,4 +6,11 @@ url = 'https://diy.by/catalog/instrument_and_electrical/976.html?PAGECOUNT=80&FI
 response = requests.get(url = url)
 print(response.status_code)
 tree = html.fromstring(response.text)
-print(response.text)
+#print(response.text)
+
+xpath = f"//div/div[@class='td_name' and 3]"
+element = tree.xpath(xpath)
+print(len(element))
+for i in range(len(element)):
+    text = element[i].text
+    print(i, text)
