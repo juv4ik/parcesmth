@@ -2,11 +2,13 @@
 import requests
 from lxml import html
 
+
 def cnnct(url):
-    response = requests.get(url = url)
+    response = requests.get(url=url)
     print(response.status_code)
     tree = html.fromstring(response.text)
     return tree
+
 
 def get_data(tree):
     xpath = f"//div/div[@class='td_name' and 3]"
@@ -25,6 +27,7 @@ def get_data(tree):
         a.append(conv_name + ":" + conv_price)
     return a
 
+
 def write_to_file(path, a):
     file = open(path, 'a')
     print(a)
@@ -33,6 +36,7 @@ def write_to_file(path, a):
         file.write(a[i] + '\n')
     file.close()
 
+
 def main(url=None):
     tree = cnnct(url)
     a = get_data(tree)
@@ -40,6 +44,7 @@ def main(url=None):
     print(a)
     path = 'outdata.txt'
     write_to_file(path, a)
+
 
 main('https://diy.by/catalog/instrument_and_electrical/976.html?PAGECOUNT=80&FIRSTLEVID=instrument_and_electrical&CATSECT=976&PAGEN_1=1')
 main('https://diy.by/catalog/instrument_and_electrical/976.html?PAGECOUNT=80&FIRSTLEVID=instrument_and_electrical&CATSECT=976&PAGEN_1=2')
