@@ -28,12 +28,21 @@ def get_data(tree):
         a.append(conv_name + ":" + conv_price)
     return a
 
+def write_to_file(path, a):
+    file = open(path, 'a')
+    print(a)
+    for i in range(len(a)):
+        print(a[i])
+        file.write(a[i] + '\n')
+    file.close()
+
 def main(url=None):
     tree = cnnct(url)
     a = get_data(tree)
     print(len(a))
     print(a)
-    #write_to_file(a)
+    path = 'outdata.txt'
+    write_to_file(path, a)
 
 main('https://diy.by/catalog/instrument_and_electrical/976.html?PAGECOUNT=80&FIRSTLEVID=instrument_and_electrical&CATSECT=976&PAGEN_1=1')
-#main('https://diy.by/catalog/instrument_and_electrical/976.html?PAGECOUNT=80&FIRSTLEVID=instrument_and_electrical&CATSECT=976&PAGEN_1=2')
+main('https://diy.by/catalog/instrument_and_electrical/976.html?PAGECOUNT=80&FIRSTLEVID=instrument_and_electrical&CATSECT=976&PAGEN_1=2')
